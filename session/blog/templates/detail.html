@@ -2,7 +2,12 @@
 <br/>
 <hr/>
 <h2>{{blog.title}}</h2>
+
 <p>{{blog.content}}</p>
+{% if blog.image %}
+  <img src="{{blog.image.url}}"/>
+{% endif %}
+
 <p>{{blog.created_at}}</p>
 
 <a href="{% url 'home' %}">홈</a>

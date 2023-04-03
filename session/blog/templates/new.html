@@ -1,11 +1,13 @@
 <h1>새 글 작성하기</h1>
-<form action="{%url 'create'%}" method="POST">
-    {% csrf_token %}
-    제목 : <input type="text" name="title" value=""/>
-    본문 : <textarea name="content" id="" cols="30" rows="10"></textarea>
-    <input type="submit" value="작성하기"/>
+<form action="{%url 'create'%}" method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  제목 :
+  <input type="text" name="title" value=""/>
+  이미지 :
+  <input type="file" name="imgfile"/>
+  본문 :
+  <textarea name="content" id="" cols="30" rows="10"></textarea>
+  <input type="submit" value="작성하기"/>
 </form>
 
 <a href="{% url 'home' %}">홈</a>
-
-

@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% static 'blog/css/style.css'%}"/>
 
 <h1>LIKELION 11 Blog Project</h1>
-<img src="{% static 'blog/img/pinkie-clap.gif'%}" alt="이모티콘">
+<img width="100px" src="{% static 'blog/img/pinkie-clap.gif'%}" alt="이모티콘">
 <a href="{% url 'new' %}">새 글 작성하기</a>
 <div>
   {% for blog in blogs %}
