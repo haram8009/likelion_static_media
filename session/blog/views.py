@@ -1,11 +1,14 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from .models import Blog
 from .forms import BlogForm
-
+from django.core.paginator import Paginator
 
 def home(request):
     blogs = Blog.objects.all()
-    return render(request,'home.html',{'blogs':blogs})
+    paginator = Paginator(blogs, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'home.html',{'page_obj':page_obj})
 
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
