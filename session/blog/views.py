@@ -71,7 +71,7 @@ def delete(request, blog_id):
 
 def search(request):
     search_text = request.GET['search']
-    keywords = request.GET['search'].split()
+    keywords = search_text.split()
     result_list = []
     for keyword in keywords:
         title_searched_blogs = Blog.objects.filter(title__contains=keyword)

@@ -39,13 +39,15 @@
         {% endif %}
       </span>
 
-      <span>
-        <span>{{page_obj.number}}</span>
+      {% for page_number in page_obj.paginator.page_range %}
         <span>
-          /
+          <a href="search?search={{search_text}}&page={{page_number}}">
+            <button id="page_number_{{page_number}}">{{page_number}}</button>
+          </a>
         </span>
-        <span>{{page_obj.paginator.num_pages}}</span>
-      </span>
+      {% endfor %}
+
+      <span id="current_page">{{page_obj.number}}</span>
 
       <span>
         {% if page_obj.has_next %}
@@ -60,3 +62,7 @@
     </div>
   </div>
 {% endblock content %}
+
+{% block script %}
+  <script type=" text/javascript" src=" {% static '/blog/js/PageLighter.js'%} "></script>
+{% endblock script %}
