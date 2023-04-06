@@ -1,27 +1,27 @@
 {% extends 'base.html' %}
 {%load static%}
 
-{% block title %}Blog Home{% endblock title %}
+{% block title %}''{% endblock title %}
 
 {% block extrahead %}{% endblock extrahead %}
 
 {% block content %}
   <div class="content">
-    <h3>전체 글 ({{blog_count}})</h3>
+    <h3>{{search_text}}
+      ({{search_count}})</h3>
     <a href="{% url 'new' %}">
       <button>새 글 작성하기</button>
     </a>
     <div class="article-container">
       {% for blog in page_obj %}
         <a href="{%url 'detail' blog.id %}">
-
           <article>
             <h2>{{blog.title}}</h2>
             {% if blog.image %}
               <img width="100px" src="{{blog.image.url}}"/>
             {% endif %}
-            <p class="blog_summary">{{blog.summary}}</p>
-            <p class="blog_createdat">{{blog.created_at}}</p>
+            <p>{{blog.summary}}</p>
+            <p>{{blog.created_at}}</p>
           </article>
         </a>
       {% endfor %}
@@ -30,10 +30,10 @@
     <div>
       <span>
         {% if page_obj.has_previous %}
-          <a href="?page=1">
+          <a href="search?search={{search_text}}&page=1">
             <button>처음으로</button>
           </a>
-          <a href="?page={{page_obj.previous_page_number}}">
+          <a href="search?search={{search_text}}&page={{page_obj.previous_page_number}}">
             <button>이전</button>
           </a>
         {% endif %}
@@ -49,10 +49,10 @@
 
       <span>
         {% if page_obj.has_next %}
-          <a href="?page={{page_obj.next_page_number}}">
+          <a href="search?search={{search_text}}&page={{page_obj.next_page_number}}">
             <button>다음</button>
           </a>
-          <a href="?page={{page_obj.paginator.num_pages}}">
+          <a href="search?search={{search_text}}&page={{page_obj.paginator.num_pages}}">
             <button>마지막으로</button>
           </a>
         {% endif %}

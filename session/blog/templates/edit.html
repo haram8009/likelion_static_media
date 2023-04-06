@@ -1,11 +1,38 @@
-<h1>edit 페이지</h1>
+{% extends 'base.html' %}
+{%load static%}
 
-<form method="POST" action="{% url 'update' edit_blog.id %}">
-    {% csrf_token %}
-    <input type="text" name="title" value="{{edit_blog.title}}"/>
-    <textarea name="content" id="" cols="30">{{edit_blog.content}}</textarea>
-    <input type="submit" value="수정하기">
-</form>
+{% block title %}글 수정하기{% endblock title %}
 
-<a href="{% url 'home' %}">홈</a>
-<a href="{% url 'delete' edit_blog.id %}">삭제하기</a>
+{% block extrahead %}{% endblock extrahead %}
+
+{% block content %}
+  <div class="content">
+    <h1>글 수정하기</h1>
+
+    <form method="POST" action="{% url 'update' edit_blog.id %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="content">
+
+        <label>제목 :<input type="text" name="title" value="{{edit_blog.title}}"/></label>
+        <label>
+          이미지 :
+          <input type="file" name="imgfile" class="button"/>
+        </label>
+        <label>
+          본문 :<textarea name="content" id="" cols="30">{{edit_blog.content}}</textarea>
+        </label>
+
+        <input type="submit" value="수정하기">
+      </div>
+    </form>
+    <br/>
+    <div>
+      <a href="{% url 'home' %}">
+        <button>홈으로</button>
+      </a>
+      <a href="{% url 'delete' edit_blog.id %}">
+        <button>삭제하기</button>
+      </a>
+    </div>
+  </div>
+{% endblock content %}

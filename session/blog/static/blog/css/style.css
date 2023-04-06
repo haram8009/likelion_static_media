@@ -1,4 +1,71 @@
 html {
-  color: rgb(255, 186, 223);
   text-align: center;
+  min-width: 400px;
+}
+header {
+  display: block;
+  width: 100%;
+}
+footer {
+  height: 30px;
+  color: gray;
+}
+button,
+input[type="file"]::file-selector-button {
+  border: 1px solid gray;
+  border-radius: 20px;
+  background-color: transparent;
+  cursor: pointer;
+}
+button:hover,
+input[type="file"]::file-selector-button:hover {
+  box-shadow: 2px 2px 2px gray;
+}
+.content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+a,
+a:link,
+a:visited {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.article-container {
+  display: flex;
+  min-width: 400px;
+  text-align: left;
+  flex-direction: column;
+  gap: 5px;
+  box-sizing: border-box;
+}
+.article-container:last-child article {
+  border: none;
+}
+article {
+  width: 100%;
+  padding: 20px 40px;
+  border-bottom: 1px solid gray;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+article img {
+  float: right;
+  margin-right: 20px;
+}
+.blog_summary {
+  word-wrap: break-word;
+}
+.blog_createdat {
+  color: gray;
+  font-size: smaller;
+}
+.blog_detail_content {
+  min-width: 400px;
+  text-align: left;
+  min-height: 400px;
 }

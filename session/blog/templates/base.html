@@ -9,11 +9,32 @@
     <title>
       {% block title %}{% endblock title %}
     </title>
+    <link rel="stylesheet" href="{% static 'blog/css/style.css'%}"/>
+    {% block extrahead %}{% endblock extrahead %}
   </head>
-  {% block extrahead %}{% endblock extrahead %}
 
   <body>
-    {% block content %}{% endblock content %}
+    <header>
+      <a href={%url 'home'%}>
+        <h1>
+          My Journey
+        </h1>
+      </a>
+      <div class="search-box">
+        <form class="search-box" action="{% url 'search' %}" method="GET">
+          <input class="search-bar" type="text" placeholder="검색어 입력" name="search"/>
+          <button type="submit">🔍</button>
+        </form>
+      </div>
+    </header>
+    <hr/>
+    <main>
+      {% block content %}{% endblock content %}
+      <hr/>
+    </main>
+    <footer>
+      © 2023. HARAM all rights reserved
+    </footer>
   </body>
 
 </html>

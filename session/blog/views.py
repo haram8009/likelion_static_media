@@ -5,10 +5,11 @@ from django.core.paginator import Paginator
 
 def home(request):
     blogs = Blog.objects.all()
+    blog_count = len(blogs)
     paginator = Paginator(blogs, 3)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request,'home.html',{'page_obj':page_obj})
+    return render(request,'home.html',{'blog_count': blog_count,'page_obj':page_obj})
 
 def detail(request, blog_id):
     blog = get_object_or_404(Blog, pk=blog_id)
@@ -45,7 +46,8 @@ def update(request, blog_id):
     old_blog = get_object_or_404(Blog, pk=blog_id)
     old_blog.title = request.POST.get("title")
     old_blog.content = request.POST.get("content")
-    old_blog.image = request.FILES.get('imgfile')
+    if request.FILES.get('imgfile'):
+        old_blog.image = request.FILES.get('imgfile')
     old_blog.save()
     return redirect('detail', old_blog.id)
 
@@ -67,5 +69,27 @@ def delete(request, blog_id):
     delete_blog.delete()
     return redirect('home')
 
+def search(request):
+    search_text = request.GET['search']
+    keywords = request.GET['search'].split()
+    result_list = []
+    for keyword in keywords:
+        title_searched_blogs = Blog.objects.filter(title__contains=keyword)
+        content_searched_blogs =(Blog.objects.filter(content__contains=keyword))
+        searched_blogs = title_searched_blogs.union(content_searched_blogs, all=False)
+        if len(searched_blogs):
+            for searched_blog in searched_blogs:
+                result_list.append(searched_blog)
+        else:
+            continue
+
+    paginator = Paginator(result_list, 3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'search.html', {
+        'search_text':search_text, 
+        'search_count':len(result_list), 
+        'result_list':result_list,
+        'page_obj':page_obj})
 
 
