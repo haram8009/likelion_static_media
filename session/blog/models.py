@@ -14,3 +14,5 @@ class Blog(models.Model):
 
     def summary(self):
         return self.content[:100]
+    
+    # TODO: 글 삭제시 media파일 삭제 구현

@@ -43,6 +43,7 @@ def edit(request, blog_id):
 
 
 def update(request, blog_id):
+    # TODO: 글 수정 시 media파일 수정 구현
     old_blog = get_object_or_404(Blog, pk=blog_id)
     old_blog.title = request.POST.get("title")
     old_blog.content = request.POST.get("content")
